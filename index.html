@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bond Café Praha - Nejlepší káva v centru Prahy</title>
+    <meta name="description" content="Bond Café Praha - Vychutnejte si nejlepší kávu v centru Prahy. Široký výběr káv, dezertů a občerstvení. Štupartská 9, Staré Město.">
+    <meta name="keywords" content="káva Praha, kavárna centrum Praha, Bond Café, káva Staré Město, dezerty Praha">
+    <meta name="author" content="Bond Café Praha">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bond Café Praha - Nejlepší káva v centru Prahy">
+    <meta property="og:description" content="Vychutnejte si nejlepší kávu v centru Prahy. Široký výběr káv, dezertů a občerstvení.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bondcafe.cz">
+    <meta property="og:image" content="https://bondcafe.cz/images/bond-cafe-og.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Bond Café",
+        "image": "https://bondcafe.cz/images/bond-cafe.jpg",
+        "description": "Nejlepší káva v centru Prahy",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Štupartská 9",
+            "addressLocality": "Praha",
+            "postalCode": "110 00",
+            "addressCountry": "CZ"
+        },
+        "telephone": "+420 608 957 187",
+        "openingHours": "Mo-Su 08:30-15:00",
+        "servesCuisine": "Káva, Dezerty, Občerstvení",
+        "priceRange": "$$"
+    }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        /* ===================================== */
+        /* MOBILE-FIRST MODERN DESIGN SYSTEM    */
+        /* ===================================== */
+        
+        /* CSS Custom Properties for Design System */
+        :root {
+            --primary-gold: #c9a77c;
+            --primary-gold-dark: #b8966b;
+            --primary-gold-light: #d4b896;
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #6a6a6a;
+            --background-cream: #fcf9f6;
+            --background-white: #ffffff;
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-strong: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --border-radius: 16px;
+            --border-radius-large: 24px;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-xxl: 64px;
+            --font-size-xs: 12px;
+            --font-size-sm: 14px;
+            --font-size-base: 16px;
+            --font-size-lg: 18px;
+            --font-size-xl: 20px;
+            --font-size-xxl: 24px;
+            --font-size-hero: 32px;
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+        
+        /* Global Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--background-white);
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* ===================================== */
+        /* MODERN HEADER & NAVIGATION           */
+        /* ===================================== */
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 167, 124, 0.1);
+            transition: all var(--transition-medium);
+            padding: 0 var(--spacing-sm);
+        }
+        
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 70px;
+        }
+        
+        .logo {
+            font-size: var(--font-size-xxl);
+            font-weight: 600;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            transition: transform var(--transition-medium);
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Desktop Navigation */
+        .nav-desktop {
+            display: none;
+        }
+        
+        /* Mobile Menu Button */
+        .menu-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--primary-gold);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            transition: all var(--transition-medium);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .menu-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .menu-toggle span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: white;
+            border-radius: 1px;
+            transition: all var(--transition-medium);
+            transform-origin: center;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .mobile-menu-link {
+            color: white;
+            font-size: 28px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all var(--transition-medium);
+        }
+        
+        .mobile-menu.active .mobile-menu-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-menu-link:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu-link:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-menu-link:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-menu-link:nth-child(4) { transition-delay: 0.25s; }
+        .mobile-menu-link:nth-child(5) { transition-delay: 0.3s; }
+        
+        .mobile-menu-link:hover {
+            color: var(--primary-gold);
+            transform: translateX(10px);
+        }
+        
+        .mobile-language {
+            position: absolute;
+            bottom: var(--spacing-xl);
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .mobile-lang-btn {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: rgba(201, 167, 124, 0.2);
+            color: white;
+            border-radius: 20px;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all var(--transition-medium);
+        }
+        
+        .mobile-lang-btn.active {
+            background: var(--primary-gold);
+        }
+        
+        /* ===================================== */
+        /* HERO SECTION - MODERN MOBILE DESIGN  */
+        /* ===================================== */
+        
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.pexels.com/photos/1024359/pexels-photo-1024359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-xxl);
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            margin-top: 70px;
+        }
+        
+        .hero-title {
+            font-size: clamp(28px, 8vw, 48px);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: var(--font-size-lg);
+            line-height: 1.5;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .btn-primary {
+            background: var(--background-white);
+            color: var(--text-dark);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: 50px;
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-medium);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .btn-primary:hover,
+        .btn-primary:active {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: 50px;
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-medium);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .btn-secondary:hover,
+        .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: clamp(24px, 6vw, 36px);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--primary-gold-light);
+        }
+        
+        .stat-label {
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+        }
+        
+        /* ===================================== */
+        /* CONTENT SECTIONS - MOBILE OPTIMIZED  */
+        /* ===================================== */
+        
+        .section {
+            padding: var(--spacing-xxl) var(--spacing-sm);
+        }
+        
+        .section-cream {
+            background: var(--background-cream);
+        }
+        
+        .section-white {
+            background: var(--background-white);
+        }
+        
+        .section-dark {
+            background: var(--text-dark);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .section-label {
+            color: var(--primary-gold);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .section-title {
+            font-size: clamp(24px, 6vw, 48px);
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .section-description {
+            font-size: var(--font-size-lg);
+            color: var(--text-medium);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* ===================================== */
+        /* COFFEE & DESSERT SECTIONS            */
+        /* ===================================== */
+        
+        .coffee-dessert-section {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+        
+        .content-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: var(--border-radius-large);
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .content-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+        
+        .content-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .content-text {
+            text-align: center;
+        }
+        
+        .type-selector {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .type-btn {
+            background: rgba(201, 167, 124, 0.1);
+            color: var(--text-medium);
+            border: 1px solid rgba(201, 167, 124, 0.2);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 25px;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all var(--transition-medium);
+            cursor: pointer;
+        }
+        
+        .type-btn.active {
+            background: var(--primary-gold);
+            color: white;
+            border-color: var(--primary-gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .type-btn:hover:not(.active) {
+            background: rgba(201, 167, 124, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        .cta-button {
+            background: var(--primary-gold);
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: 50px;
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: all var(--transition-medium);
+            box-shadow: var(--shadow-soft);
+            margin-top: var(--spacing-md);
+        }
+        
+        .cta-button:hover,
+        .cta-button:active {
+            background: var(--primary-gold-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* ===================================== */
+        /* PRODUCT GRID                         */
+        /* ===================================== */
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .product-card {
+            background: var(--background-white);
+            border-radius: var(--border-radius-large);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all var(--transition-medium);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .product-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-add {
+            position: absolute;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            color: var(--primary-gold);
+            transition: all var(--transition-medium);
+            backdrop-filter: blur(10px);
+        }
+        
+        .product-add:hover {
+            background: var(--primary-gold);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: var(--spacing-md);
+        }
+        
+        .product-name {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .product-description {
+            color: var(--text-medium);
+            font-size: var(--font-size-base);
+            line-height: 1.5;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .product-price {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--primary-gold);
+        }
+        
+        /* ===================================== */
+        /* GALLERY SECTION                      */
+        /* ===================================== */
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all var(--transition-medium);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* ===================================== */
+        /* LOCATION SECTION                     */
+        /* ===================================== */
+        
+        .location-map {
+            margin: var(--spacing-xl) 0;
+            border-radius: var(--border-radius-large);
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            height: 300px;
+        }
+        
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .location-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+        }
+        
+        /* ===================================== */
+        /* CONTACT FORM                         */
+        /* ===================================== */
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+        }
+        
+        .contact-info {
+            text-align: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gold);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+        }
+        
+        .contact-form {
+            background: var(--background-white);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-label {
+            display: block;
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: var(--spacing-sm);
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: var(--font-size-base);
+            transition: all var(--transition-medium);
+            background: #f8f8f8;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(201, 167, 124, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-light));
+            color: white;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-medium);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .form-submit:hover,
+        .form-submit:active {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* ===================================== */
+        /* TESTIMONIAL SECTION                  */
+        /* ===================================== */
+        
+        .testimonial {
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            background: linear-gradient(135deg, var(--primary-gold-light), var(--primary-gold));
+            border-radius: var(--border-radius-large);
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .testimonial-quote {
+            font-size: clamp(18px, 4vw, 24px);
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .testimonial-author {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        /* ===================================== */
+        /* FOOTER                               */
+        /* ===================================== */
+        
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: var(--spacing-xxl) var(--spacing-sm) var(--spacing-lg);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary-gold);
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .footer-section p {
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.6;
+        }
+        
+        .footer-section a {
+            color: white;
+            transition: color var(--transition-medium);
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary-gold);
+        }
+        
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(201, 167, 124, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-lg);
+            transition: all var(--transition-medium);
+        }
+        
+        .footer-social a:hover {
+            background: var(--primary-gold);
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid #333;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .footer-links a {
+            font-size: var(--font-size-sm);
+            transition: color var(--transition-medium);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-gold);
+        }
+        
+        .footer-copyright {
+            font-size: var(--font-size-xs);
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+        
+        /* ===================================== */
+        /* DESKTOP RESPONSIVE STYLES            */
+        /* ===================================== */
+        
+        @media (min-width: 768px) {
+            :root {
+                --spacing-sm: 20px;
+                --spacing-md: 32px;
+                --spacing-lg: 48px;
+                --spacing-xl: 64px;
+                --spacing-xxl: 96px;
+                --font-size-hero: 56px;
+            }
+            
+            .header-container {
+                padding: 0 var(--spacing-lg);
+                height: 80px;
+            }
+            
+            .nav-desktop {
+                display: flex;
+                gap: var(--spacing-lg);
+            }
+            
+            .nav-link {
+                font-size: var(--font-size-base);
+                font-weight: 500;
+                transition: all var(--transition-medium);
+                position: relative;
+            }
+            
+            .nav-link:after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--primary-gold);
+                transition: width var(--transition-medium);
+            }
+            
+            .nav-link:hover:after {
+                width: 100%;
+            }
+            
+            .nav-link:hover {
+                color: var(--primary-gold);
+            }
+            
+            .menu-toggle {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .coffee-dessert-section {
+                flex-direction: row;
+                align-items: center;
+                gap: var(--spacing-xxl);
+            }
+            
+            .content-image,
+            .content-text {
+                flex: 1;
+            }
+            
+            .content-text {
+                text-align: left;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+            }
+            
+            .location-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+                text-align: left;
+            }
+            
+            .footer-links {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* ===================================== */
+        /* ANIMATIONS & INTERACTIONS            */
+        /* ===================================== */
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Touch interactions */
+        .touch-target {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .touch-target::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .touch-target:active::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Success Animation */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .success-modal {
+            background: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-large);
+            text-align: center;
+            max-width: 400px;
+            margin: var(--spacing-sm);
+            box-shadow: var(--shadow-strong);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all var(--transition-medium);
+        }
+        
+        .success-overlay.show .success-modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-size: var(--font-size-xl);
+        }
+        
+        /* GDPR Banner */
+        .gdpr-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            color: white;
+            padding: var(--spacing-md);
+            z-index: 10000;
+            transform: translateY(100%);
+            transition: transform var(--transition-medium);
+            backdrop-filter: blur(10px);
+        }
+        
+        .gdpr-banner.show {
+            transform: translateY(0);
+        }
+        
+        .gdpr-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gdpr-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .gdpr-btn {
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            transition: all var(--transition-medium);
+            flex: 1;
+        }
+        
+        .gdpr-accept {
+            background: var(--primary-gold);
+            color: white;
+        }
+        
+        .gdpr-settings {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+        
+        @media (min-width: 768px) {
+            .gdpr-content {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            .gdpr-buttons {
+                flex-shrink: 0;
+            }
+            
+            .gdpr-btn {
+                flex: none;
+                white-space: nowrap;
+            }
+        }
+        
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-light) 100%);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity var(--transition-slow), visibility var(--transition-slow);
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader-icon {
+            font-size: 48px;
+            color: white;
+            margin-bottom: var(--spacing-md);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .loader-text {
+            color: white;
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: var(--spacing-md);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-icon">
+            <i class="fas fa-coffee"></i>
+        </div>
+        <div class="loader-text" data-translate="loading">Načítání...</div>
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-modal">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 id="successTitle" data-translate="success-title">Úspěch!</h3>
+            <p id="successMessage" data-translate="success-message">Vaše zpráva byla úspěšně odeslána.</p>
+            <button class="cta-button" onclick="closeSuccessModal()" data-translate="close">Zavřít</button>
+        </div>
+    </div>
+
+    <!-- GDPR Banner -->
+    <div class="gdpr-banner" id="gdprBanner">
+        <div class="gdpr-content">
+            <div>
+                <strong data-translate="cookies-title">Soubory cookies</strong><br>
+                <span data-translate="cookies-text">Používáme cookies pro zlepšení vašeho zážitku na našich stránkách.</span>
+            </div>
+            <div class="gdpr-buttons">
+                <button class="gdpr-btn gdpr-accept" onclick="acceptCookies()" data-translate="accept-all">Přijmout vše</button>
+                <button class="gdpr-btn gdpr-settings" onclick="showCookieSettings()" data-translate="settings">Nastavení</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="#home" class="logo">BOND CAFÉ</a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="nav-desktop">
+                <a href="#home" class="nav-link" data-translate="nav-home">Domů</a>
+                <a href="#about" class="nav-link" data-translate="nav-menu">Menu</a>
+                <a href="#gallery" class="nav-link" data-translate="nav-events">Events</a>
+                <a href="#contact" class="nav-link" data-translate="nav-contact">Kontakt</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="#home" class="mobile-menu-link" data-translate="nav-home">Domů</a>
+            <a href="#about" class="mobile-menu-link" data-translate="nav-menu">Menu</a>
+            <a href="#gallery" class="mobile-menu-link" data-translate="nav-events">Events</a>
+            <a href="#contact" class="mobile-menu-link" data-translate="nav-contact">Kontakt</a>
+            <a href="tel:+420608957187" class="mobile-menu-link" data-translate="reservation">Rezervace</a>
+        </div>
+        
+        <div class="mobile-language">
+            <button class="mobile-lang-btn active" data-lang="cs">CZ</button>
+            <button class="mobile-lang-btn" data-lang="en">EN</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title" data-translate="hero-title">VYCHUTNEJTE SI RANNÍ KÁVU</h1>
+            <p class="hero-subtitle" data-translate="hero-desc">Od roku 2010 je naše rodina na misi poskytovat udržitelnou a etickou, ručně praženou, výběrovou kávu za férovou cenu pro vás i farmáře.</p>
+            
+            <div class="hero-buttons">
+                <a href="#about" class="btn-primary touch-target" data-translate="menu-btn">MENU</a>
+                <a href="tel:+420608957187" class="btn-secondary touch-target">
+                    <span data-translate="reservation">REZERVACE</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label" data-translate="coffee-types">Druhů kávy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label" data-translate="years-experience">Let zkušeností</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label" data-translate="happy-customers">Spokojených zákazníků</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coffee Section -->
+    <section class="section section-cream" id="about">
+        <div class="container">
+            <div class="coffee-dessert-section">
+                <div class="content-image">
+                    <img id="coffeeImage" src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Káva">
+                </div>
+                <div class="content-text">
+                    <div class="section-label" data-translate="our-coffee">NAŠE KÁVA</div>
+                    <h2 class="section-title" data-translate="choose-coffee">Vyberte si svou oblíbenou kávu</h2>
+                    <p class="section-description" data-translate="coffee-desc">Více než 100 druhů kávy je připraveno k servírování našimi profesionály.</p>
+                    
+                    <div class="type-selector">
+                        <button class="type-btn active coffee-type" data-coffee="cappuccino">CAPPUCCINO</button>
+                        <button class="type-btn coffee-type" data-coffee="latte">LATTÉ</button>
+                        <button class="type-btn coffee-type" data-coffee="espresso">ESPRESSO</button>
+                    </div>
+                    
+                    <a href="#menu" class="cta-button touch-target">
+                        <span data-translate="full-menu">CELÉ MENU</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Desserts Section -->
+    <section class="section section-white">
+        <div class="container">
+            <div class="coffee-dessert-section">
+                <div class="content-text">
+                    <div class="section-label" data-translate="our-desserts">NAŠE DEZERTY</div>
+                    <h2 class="section-title" data-translate="complement-coffee">Doplňte svou kávu našimi dezerty</h2>
+                    <p class="section-description">Naše dezerty jsou vyrobeny každý den čerstvě z nejlepších surovin.</p>
+                    
+                    <div class="type-selector">
+                        <button class="type-btn active dessert-type" data-dessert="tiramisu">TIRAMISU</button>
+                        <button class="type-btn dessert-type" data-dessert="cheesecake">CHEESECAKE</button>
+                        <button class="type-btn dessert-type" data-dessert="brownie">BROWNIE</button>
+                    </div>
+                    
+                    <a href="#menu" class="cta-button touch-target">
+                        <span data-translate="more-desserts">VÍCE DEZERTŮ</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="content-image">
+                    <img id="dessertImage" src="https://images.pexels.com/photos/14141545/pexels-photo-14141545.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Dezert">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Preview Section -->
+    <section class="section section-cream" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="best-coffee-prague">Vyzkoušejte nejlepší kávu v Praze</h2>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/5211575/pexels-photo-5211575.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Frappé">
+                        <button class="product-add touch-target">+</button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">FRAPPÉ</h3>
+                        <p class="product-description" data-translate="frappe-desc">Osvěžující ledová káva s lahodnou mléčnou pěnou.</p>
+                        <div class="product-price">89 Kč</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/5840154/pexels-photo-5840154.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Apple Pie">
+                        <button class="product-add touch-target">+</button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">APPLE PIE</h3>
+                        <p class="product-description" data-translate="apple-pie-desc">Výborný dezert ke skvělé kávě.</p>
+                        <div class="product-price">95 Kč</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/32166398/pexels-photo-32166398/free-photo-of-chilled-iced-coffee-in-elegant-glass-with-straws.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Cold Brew">
+                        <button class="product-add touch-target">+</button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">COLD BREW</h3>
+                        <p class="product-description" data-translate="cold-brew-desc">Pomalu extrahovaná studená káva s jemnou a sladkou chutí.</p>
+                        <div class="product-price">65 Kč</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/685527/pexels-photo-685527.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Espresso">
+                        <button class="product-add touch-target">+</button>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">ESPRESSO</h3>
+                        <p class="product-description" data-translate="espresso-desc">Tradiční italské espresso z nejlepších zrn z celého světa.</p>
+                        <div class="product-price">49 Kč</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="find-us">Kde nás najdete :)</h2>
+                <p class="section-description" data-translate="location-desc">Bond Café najdete v samém srdci Prahy, pár kroků od hlavních památek i rušných ulic.</p>
+            </div>
+            
+            <div class="location-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.919118232477!2d14.422157477300392!3d50.08780117152529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94ebc85e816d%3A0x2e584ab975188878!2sBond%20Cafe!5e0!3m2!1scs!2scz!4v1747949107536!5m2!1scs!2scz"></iframe>
+            </div>
+            
+            <div class="location-buttons">
+                <a href="https://maps.app.goo.gl/dvF1HxwPkEUSfGbJ6" target="_blank" class="btn-secondary touch-target">
+                    <span data-translate="open-maps">Otevřít v Mapách</span>
+                </a>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Bond+Cafe,+Praha" target="_blank" class="btn-secondary touch-target">
+                    <span data-translate="navigate">Navigovat</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section section-cream" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label" data-translate="gallery">GALERIE</div>
+                <h2 class="section-title" data-translate="great-atmosphere">Naše skvělá atmosféra</h2>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Kávová atmosféra">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.pexels.com/photos/13294518/pexels-photo-13294518.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Kávová atmosféra">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Kávová atmosféra">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1455621481073-d5bc1c40e3cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1189&q=80" alt="Kávová atmosféra">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Kávová atmosféra">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="section section-white">
+        <div class="container">
+            <div class="testimonial">
+                <div class="section-label" data-translate="testimonials-label">CO ŘÍKAJÍ NAŠI ZÁKAZNÍCI</div>
+                <p class="testimonial-quote" data-translate="testimonial">"Bond Caffe mě fakt příjemně překvapil. Skvělá káva, na které je vidět, že jim záleží na kvalitě. Obsluha byla milá a prostředí útulné – ideální na posezení s kamarády i pracovní schůzku."</p>
+                <div class="testimonial-author">- Spokojený zákazník</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section section-cream" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="contact">Kontakt</h2>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3 data-translate="contact-info">Kontaktní informace</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <strong data-translate="address">Adresa</strong><br>
+                            Štupartská 9<br>
+                            110 00 Staré Město, Praha
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <strong data-translate="phone">Telefon</strong><br>
+                            <a href="tel:+420608957187">+420 608 957 187</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <strong data-translate="opening-hours">Otevírací doba</strong><br>
+                            <span data-translate="schedule">Po-Čt: 8:30-15:00<br>Pá-Ne: 8:30-17:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <h3 data-translate="write-us">Napište nám</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="name" data-translate="form-label-name">Jméno</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="phone" data-translate="form-label-phone">Telefon</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email" data-translate="form-label-email">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="message" data-translate="form-label-message">Zpráva</label>
+                        <textarea id="message" name="message" class="form-textarea" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="form-submit touch-target" data-translate="form-button-send">Odeslat</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="cta-title">Pojďme společně ochutnat tu kávu</h2>
+                <a href="#about" class="cta-button touch-target animate-pulse" data-translate="menu-btn">MENU</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>BOND CAFÉ</h3>
+                    <p data-translate="footer-desc">Nejlepší káva v Praze. Navštivte nás v centru Prahy a ochutnejte naši výběrovou kávu.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 data-translate="contact">Kontakt</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Štupartská 9, 110 00 Staré Město</p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:+420608957187">+420 608 957 187</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@bondcafe.cz">info@bondcafe.cz</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 data-translate="quick-links">Rychlé odkazy</h3>
+                    <p><a href="#home" data-translate="nav-home">Domů</a></p>
+                    <p><a href="#about" data-translate="nav-menu">Menu</a></p>
+                    <p><a href="#gallery" data-translate="nav-events">Events</a></p>
+                    <p><a href="#contact" data-translate="nav-contact">Kontakt</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="#" data-translate="privacy-policy">Ochrana osobních údajů</a>
+                    <a href="#" data-translate="terms">Obchodní podmínky</a>
+                    <a href="#" data-translate="cookie-policy">Zásady cookies</a>
+                </div>
+                <div class="footer-copyright">
+                    © 2024 Bond Café Praha. <span data-translate="rights-reserved">Všechna práva vyhrazena.</span><br>
+                    <a href="https://www.pnhmedia.com" target="_blank" rel="noopener" data-translate="created-by">Vytvořeno: PNH MEDIA</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // ===================================== 
+        // MODERN MOBILE-FIRST JAVASCRIPT
+        // ===================================== 
+
+        // Translation System
+        const translations = {
+            cs: {
+                'loading': 'Načítání...',
+                'cookies-title': 'Soubory cookies',
+                'cookies-text': 'Používáme cookies pro zlepšení vašeho zážitku na našich stránkách.',
+                'accept-all': 'Přijmout vše',
+                'settings': 'Nastavení',
+                'success-title': 'Úspěch!',
+                'success-message': 'Vaše zpráva byla úspěšně odeslána.',
+                'close': 'Zavřít',
+                'nav-home': 'Domů',
+                'nav-menu': 'Menu',
+                'nav-events': 'Events',
+                'nav-contact': 'Kontakt',
+                'menu-btn': 'MENU',
+                'hero-title': 'VYCHUTNEJTE SI RANNÍ KÁVU',
+                'hero-desc': 'Od roku 2010 je naše rodina na misi poskytovat udržitelnou a etickou, ručně praženou, výběrovou kávu za férovou cenu pro vás i farmáře.',
+                'reservation': 'REZERVACE',
+                'coffee-types': 'Druhů kávy',
+                'years-experience': 'Let zkušeností',
+                'happy-customers': 'Spokojených zákazníků',
+                'our-coffee': 'NAŠE KÁVA',
+                'choose-coffee': 'Vyberte si svou oblíbenou kávu',
+                'coffee-desc': 'Více než 100 druhů kávy je připraveno k servírování našimi profesionály.',
+                'full-menu': 'CELÉ MENU',
+                'our-desserts': 'NAŠE DEZERTY',
+                'complement-coffee': 'Doplňte svou kávu našimi dezerty',
+                'more-desserts': 'VÍCE DEZERTŮ',
+                'best-coffee-prague': 'Vyzkoušejte nejlepší kávu v Praze',
+                'frappe-desc': 'Osvěžující ledová káva s lahodnou mléčnou pěnou.',
+                'apple-pie-desc': 'Výborný dezert ke skvělé kávě.',
+                'cold-brew-desc': 'Pomalu extrahovaná studená káva s jemnou a sladkou chutí.',
+                'espresso-desc': 'Tradiční italské espresso z nejlepších zrn z celého světa.',
+                'find-us': 'Kde nás najdete :)',
+                'location-desc': 'Bond Café najdete v samém srdci Prahy, pár kroků od hlavních památek i rušných ulic.',
+                'open-maps': 'Otevřít v Mapách',
+                'navigate': 'Navigovat',
+                'gallery': 'GALERIE',
+                'great-atmosphere': 'Naše skvělá atmosféra',
+                'testimonials-label': 'CO ŘÍKAJÍ NAŠI ZÁKAZNÍCI',
+                'testimonial': '"Bond Caffe mě fakt příjemně překvapil. Skvělá káva, na které je vidět, že jim záleží na kvalitě. Obsluha byla milá a prostředí útulné – ideální na posezení s kamarády i pracovní schůzku."',
+                'contact-info': 'Kontaktní informace',
+                'address': 'Adresa',
+                'phone': 'Telefon',
+                'opening-hours': 'Otevírací doba',
+                'schedule': 'Po-Čt: 8:30-15:00<br>Pá-Ne: 8:30-17:00',
+                'write-us': 'Napište nám',
+                'form-label-name': 'Jméno',
+                'form-label-phone': 'Telefon',
+                'form-label-email': 'Email',
+                'form-label-message': 'Zpráva',
+                'form-button-send': 'Odeslat',
+                'cta-title': 'Pojďme společně ochutnat tu kávu',
+                'footer-desc': 'Nejlepší káva v Praze. Navštivte nás v centru Prahy a ochutnejte naši výběrovou kávu.',
+                'contact': 'Kontakt',
+                'quick-links': 'Rychlé odkazy',
+                'privacy-policy': 'Ochrana osobních údajů',
+                'terms': 'Obchodní podmínky',
+                'cookie-policy': 'Zásady cookies',
+                'rights-reserved': 'Všechna práva vyhrazena.',
+                'created-by': 'Vytvořeno: PNH MEDIA'
+            },
+            en: {
+                'loading': 'Loading...',
+                'cookies-title': 'Cookies',
+                'cookies-text': 'We use cookies to improve your experience on our website.',
+                'accept-all': 'Accept All',
+                'settings': 'Settings',
+                'success-title': 'Success!',
+                'success-message': 'Your message has been sent successfully.',
+                'close': 'Close',
+                'nav-home': 'Home',
+                'nav-menu': 'Menu',
+                'nav-events': 'Events',
+                'nav-contact': 'Contact',
+                'menu-btn': 'MENU',
+                'hero-title': 'ENJOY YOUR MORNING COFFEE',
+                'hero-desc': 'Since 2010, our family has been on a mission to provide sustainable and ethical, hand-roasted, specialty coffee at a fair price for both you and the farmers.',
+                'reservation': 'RESERVATION',
+                'coffee-types': 'Coffee Types',
+                'years-experience': 'Years of Experience',
+                'happy-customers': 'Happy Customers',
+                'our-coffee': 'OUR COFFEE',
+                'choose-coffee': 'Choose Your Favorite Coffee',
+                'coffee-desc': 'More than 100 types of coffee are ready to be served by our professionals.',
+                'full-menu': 'FULL MENU',
+                'our-desserts': 'OUR DESSERTS',
+                'complement-coffee': 'Complement Your Coffee with Our Desserts',
+                'more-desserts': 'MORE DESSERTS',
+                'best-coffee-prague': 'Try the Best Coffee in Prague',
+                'frappe-desc': 'Refreshing iced coffee with delicious milk foam.',
+                'apple-pie-desc': 'Excellent dessert with great coffee.',
+                'cold-brew-desc': 'Slowly extracted cold coffee with a smooth and sweet taste.',
+                'espresso-desc': 'Traditional Italian espresso from the finest beans from around the world.',
+                'find-us': 'Where to Find Us :)',
+                'location-desc': 'Bond Café is located in the very heart of Prague, just steps away from major landmarks and busy streets.',
+                'open-maps': 'Open in Maps',
+                'navigate': 'Navigate',
+                'gallery': 'GALLERY',
+                'great-atmosphere': 'Our Great Atmosphere',
+                'testimonials-label': 'WHAT OUR CUSTOMERS SAY',
+                'testimonial': '"Bond Caffe really pleasantly surprised me. Great coffee where you can see they care about quality. The staff was nice and the atmosphere cozy – perfect for hanging out with friends or a business meeting."',
+                'contact-info': 'Contact Information',
+                'address': 'Address',
+                'phone': 'Phone',
+                'opening-hours': 'Opening Hours',
+                'schedule': 'Mon-Thu: 8:30-15:00<br>Fri-Sun: 8:30-17:00',
+                'write-us': 'Write to Us',
+                'form-label-name': 'Name',
+                'form-label-phone': 'Phone',
+                'form-label-email': 'Email',
+                'form-label-message': 'Message',
+                'form-button-send': 'Send',
+                'cta-title': 'Let\'s Taste That Coffee Together',
+                'footer-desc': 'The best coffee in Prague. Visit us in the center of Prague and taste our specialty coffee.',
+                'contact': 'Contact',
+                'quick-links': 'Quick Links',
+                'privacy-policy': 'Privacy Policy',
+                'terms': 'Terms & Conditions',
+                'cookie-policy': 'Cookie Policy',
+                'rights-reserved': 'All rights reserved.',
+                'created-by': 'Created by: PNH MEDIA'
+            }
+        };
+
+        let currentLanguage = 'cs';
+
+        // Initialize App
+        class BondCafeApp {
+            constructor() {
+                this.currentLanguage = 'cs';
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.loadSavedLanguage();
+                this.setupScrollBehavior();
+                this.setupImageSwitchers();
+                this.setupMobileMenu();
+                this.setupContactForm();
+                this.showGDPRBanner();
+                this.hideLoader();
+                this.initAnimations();
+            }
+
+            // Event Listeners
+            setupEventListeners() {
+                // Language switching
+                document.addEventListener('click', (e) => {
+                    if (e.target.matches('[data-lang]')) {
+                        this.switchLanguage(e.target.dataset.lang);
+                    }
+                });
+
+                // Mobile menu
+                document.getElementById('menuToggle').addEventListener('click', () => {
+                    this.toggleMobileMenu();
+                });
+
+                // Mobile menu links
+                document.querySelectorAll('.mobile-menu-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        this.closeMobileMenu();
+                    });
+                });
+
+                // Smooth scrolling
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.smoothScroll(anchor.getAttribute('href'));
+                    });
+                });
+
+                // Touch interactions
+                this.setupTouchInteractions();
+            }
+
+            // Language Management
+            switchLanguage(lang) {
+                this.currentLanguage = lang;
+                this.translatePage();
+                this.updateLanguageButtons();
+                localStorage.setItem('bond-cafe-language', lang);
+            }
+
+            translatePage() {
+                document.querySelectorAll('[data-translate]').forEach(element => {
+                    const key = element.dataset.translate;
+                    const translation = translations[this.currentLanguage]?.[key];
+                    
+                    if (translation) {
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = translation;
+                        } else {
+                            element.innerHTML = translation;
+                        }
+                    }
+                });
+            }
+
+            updateLanguageButtons() {
+                document.querySelectorAll('[data-lang]').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === this.currentLanguage);
+                });
+            }
+
+            loadSavedLanguage() {
+                const saved = localStorage.getItem('bond-cafe-language') || 'cs';
+                this.switchLanguage(saved);
+            }
+
+            // Navigation & Scroll
+            setupScrollBehavior() {
+                let lastScrollY = window.scrollY;
+                const header = document.getElementById('header');
+
+                window.addEventListener('scroll', () => {
+                    const currentScrollY = window.scrollY;
+                    
+                    // Add scrolled class
+                    header.classList.toggle('scrolled', currentScrollY > 50);
+                    
+                    lastScrollY = currentScrollY;
+                }, { passive: true });
+            }
+
+            smoothScroll(target) {
+                const element = document.querySelector(target);
+                if (!element) return;
+
+                const headerHeight = 80;
+                const targetPosition = element.offsetTop - headerHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Mobile Menu
+            toggleMobileMenu() {
+                const menu = document.getElementById('mobileMenu');
+                const toggle = document.getElementById('menuToggle');
+                const body = document.body;
+
+                const isActive = menu.classList.contains('active');
+                
+                menu.classList.toggle('active');
+                toggle.classList.toggle('active');
+
+                if (!isActive) {
+                    body.style.overflow = 'hidden';
+                } else {
+                    body.style.overflow = '';
+                }
+            }
+
+            closeMobileMenu() {
+                const menu = document.getElementById('mobileMenu');
+                const toggle = document.getElementById('menuToggle');
+                const body = document.body;
+
+                menu.classList.remove('active');
+                toggle.classList.remove('active');
+                body.style.overflow = '';
+            }
+
+            // Image Switchers
+            setupImageSwitchers() {
+                const coffeeImages = {
+                    'cappuccino': 'https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                    'latte': 'https://images.pexels.com/photos/31249687/pexels-photo-31249687/free-photo-of-elegant-coffee-and-dessert-display-in-cafe.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                    'espresso': 'https://images.pexels.com/photos/32176011/pexels-photo-32176011/free-photo-of-elegant-latte-art-in-cafe-kitsune-cup.jpeg?auto=compress&cs=tinysrgb&w=1200'
+                };
+
+                const dessertImages = {
+                    'tiramisu': 'https://images.pexels.com/photos/14141545/pexels-photo-14141545.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                    'cheesecake': 'https://images.pexels.com/photos/4078187/pexels-photo-4078187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                    'brownie': 'https://images.pexels.com/photos/887850/pexels-photo-887850.jpeg?auto=compress&cs=tinysrgb&w=1200'
+                };
+
+                // Coffee type switcher
+                document.querySelectorAll('.coffee-type').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.coffee-type').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        const type = btn.dataset.coffee;
+                        const img = document.getElementById('coffeeImage');
+                        if (img && coffeeImages[type]) {
+                            this.switchImage(img, coffeeImages[type]);
+                        }
+                    });
+                });
+
+                // Dessert type switcher
+                document.querySelectorAll('.dessert-type').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.dessert-type').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        const type = btn.dataset.dessert;
+                        const img = document.getElementById('dessertImage');
+                        if (img && dessertImages[type]) {
+                            this.switchImage(img, dessertImages[type]);
+                        }
+                    });
+                });
+            }
+
+            switchImage(imgElement, newSrc) {
+                imgElement.style.opacity = '0';
+                imgElement.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    imgElement.src = newSrc;
+                    imgElement.style.opacity = '1';
+                    imgElement.style.transform = 'scale(1)';
+                }, 200);
+            }
+
+            // Touch Interactions
+            setupTouchInteractions() {
+                document.querySelectorAll('.touch-target').forEach(element => {
+                    element.addEventListener('touchstart', () => {
+                        element.style.transform = 'scale(0.98)';
+                    }, { passive: true });
+
+                    element.addEventListener('touchend', () => {
+                        setTimeout(() => {
+                            element.style.transform = '';
+                        }, 100);
+                    }, { passive: true });
+
+                    element.addEventListener('touchcancel', () => {
+                        element.style.transform = '';
+                    }, { passive: true });
+                });
+            }
+
+            // Contact Form
+            setupContactForm() {
+                const form = document.getElementById('contactForm');
+                if (!form) return;
+
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const submitBtn = form.querySelector('.form-submit');
+                    const originalText = submitBtn.textContent;
+                    
+                    // Show loading state
+                    submitBtn.textContent = this.currentLanguage === 'cs' ? 'Odesílání...' : 'Sending...';
+                    submitBtn.disabled = true;
+
+                    try {
+                        // Simulate form submission
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        
+                        // Show success
+                        this.showSuccessModal();
+                        form.reset();
+                        
+                    } catch (error) {
+                        console.error('Form submission error:', error);
+                        alert(this.currentLanguage === 'cs' ? 'Chyba při odesílání.' : 'Error sending message.');
+                    } finally {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+
+            // Success Modal
+            showSuccessModal() {
+                const overlay = document.getElementById('successOverlay');
+                const title = document.getElementById('successTitle');
+                const message = document.getElementById('successMessage');
+
+                title.textContent = translations[this.currentLanguage]['success-title'];
+                message.textContent = translations[this.currentLanguage]['success-message'];
+
+                overlay.style.display = 'flex';
+                setTimeout(() => overlay.classList.add('show'), 10);
+            }
+
+            // GDPR
+            showGDPRBanner() {
+                if (!localStorage.getItem('bond-cafe-gdpr-accepted')) {
+                    setTimeout(() => {
+                        document.getElementById('gdprBanner').classList.add('show');
+                    }, 2000);
+                }
+            }
+
+            // Loader
+            hideLoader() {
+                setTimeout(() => {
+                    const loader = document.getElementById('loader');
+                    loader.classList.add('hidden');
+                    
+                    // Start animations after loader
+                    setTimeout(() => {
+                        document.body.classList.add('loaded');
+                        this.animateHeroElements();
+                    }, 500);
+                }, 1500);
+            }
+
+            // Animations
+            initAnimations() {
+                if (typeof AOS !== 'undefined') {
+                    AOS.init({
+                        duration: 800,
+                        easing: 'ease-out-cubic',
+                        once: true,
+                        offset: 50
+                    });
+                }
+            }
+
+            animateHeroElements() {
+                const elements = [
+                    '.hero-title',
+                    '.hero-subtitle', 
+                    '.hero-buttons',
+                    '.hero-stats'
+                ];
+
+                elements.forEach((selector, index) => {
+                    const element = document.querySelector(selector);
+                    if (element) {
+                        setTimeout(() => {
+                            element.classList.add('animate-fade-in-up');
+                        }, index * 200);
+                    }
+                });
+            }
+        }
+
+        // Global Functions for Inline Handlers
+        window.acceptCookies = function() {
+            localStorage.setItem('bond-cafe-gdpr-accepted', 'true');
+            document.getElementById('gdprBanner').classList.remove('show');
+        };
+
+        window.showCookieSettings = function() {
+            alert('Cookie settings modal would open here');
+        };
+
+        window.closeSuccessModal = function() {
+            const overlay = document.getElementById('successOverlay');
+            overlay.classList.remove('show');
+            setTimeout(() => overlay.style.display = 'none', 300);
+        };
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            new BondCafeApp();
+        });
+
+        // Handle orientation change
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                window.scrollTo(window.scrollX, window.scrollY);
+            }, 100);
+        });
+
+        // Prevent zoom on input focus (iOS)
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            document.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.fontSize = '16px';
+                });
+            });
+        }
+    </script>
+</body>
+</html>

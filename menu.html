@@ -1,0 +1,2495 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Bond Café Praha | Nejlepší káva a snídaně v centru Prahy</title>
+    <meta name="description" content="Prohlédněte si naše menu - káva, snídaně, dezerty a lehká jídla. Bond Café Praha, Štupartská 9, Staré Město.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        /* LOADER STYLES */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #c9a77c 0%, #b8966b 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loader-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        .loader-text {
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .coffee-icon {
+            font-size: 40px;
+            color: white;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* LANGUAGE SWITCHER STYLES */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(201, 167, 124, 0.1);
+            border-radius: 25px;
+            padding: 5px;
+            border: 1px solid rgba(201, 167, 124, 0.3);
+        }
+        
+        .lang-btn {
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: #ffffff;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .lang-btn.active {
+            background: #c9a77c;
+            color: white;
+            box-shadow: 0 2px 8px rgba(201, 167, 124, 0.3);
+        }
+        
+        .lang-btn:hover:not(.active) {
+            background: rgba(201, 167, 124, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: #fcf9f6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+/* Header Styles - CORRECTED VERSION */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: rgba(255, 255, 255, 0.0); /* Transparent initially */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all 0.4s ease;
+    color: white !important; /* White text on transparent background */
+    backdrop-filter: none; /* No blur initially */
+   
+}
+
+header.scrolled {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 15px 40px;
+    background-color: white;
+    position: fixed;
+    top: 22px; /* Creates the floating effect */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: white;
+    padding: 22px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    transition: box-shadow 0.2s;
+    color: #000000 !important; /* Dark text on white background when scrolled */
+    backdrop-filter: blur(10px);
+    width: auto; /* Allow it to shrink to content */
+    max-width: 90%; /* Don't go too wide on mobile */
+}
+
+header.nav-hidden {
+    transform: translateY(-100%);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-links a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #c9a77c;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover:after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: #c9a77c;
+}
+
+.menu-btn {
+    background-color: #c9a77c;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.menu-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.menu-btn:hover:before {
+    left: 100%;
+}
+
+.menu-btn:hover {
+    background-color: #b8966b;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(201, 167, 124, 0.3);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ENHANCED HAMBURGER MENU - EXACT COPY FROM INDEX */
+.hamburger {
+    display: none;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: #333;
+    border-radius: 2px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: all 0.25s ease-in-out;
+}
+
+.hamburger span:nth-child(1) { top: 0px; }
+.hamburger span:nth-child(2),
+.hamburger span:nth-child(3) { top: 9px; }
+.hamburger span:nth-child(4) { top: 18px; }
+
+.hamburger.active span:nth-child(1) {
+    top: 9px;
+    width: 0%;
+    left: 50%;
+}
+
+.hamburger.active span:nth-child(2) {
+    transform: rotate(45deg);
+    background: white;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg);
+    background: white;
+}
+
+.hamburger.active span:nth-child(4) {
+    top: 9px;
+    width: 0%;
+    left: 50%;
+}
+
+/* ENHANCED MOBILE MENU - EXACT COPY FROM INDEX */
+.mobile-menu {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.97) 0%, rgba(30, 30, 30, 0.97) 100%) !important;
+    z-index: 999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 25px !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0) !important;
+    backdrop-filter: blur(20px) !important;
+}
+
+.mobile-menu.active {
+    transform: translateX(0) !important;
+}
+
+.mobile-menu a {
+    color: white !important;
+    font-size: 24px !important;
+    font-weight: 500 !important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+    opacity: 0 !important;
+    transform: translateY(30px) !important;
+    position: relative !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+}
+
+.mobile-menu.active a {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.mobile-menu a:nth-child(1) { transition-delay: 0.1s !important; }
+.mobile-menu a:nth-child(2) { transition-delay: 0.15s !important; }
+.mobile-menu a:nth-child(3) { transition-delay: 0.2s !important; }
+.mobile-menu a:nth-child(4) { transition-delay: 0.25s !important; }
+.mobile-menu a:nth-child(5) { transition-delay: 0.3s !important; }
+.mobile-menu a:nth-child(6) { transition-delay: 0.35s !important; }
+
+.mobile-menu a:hover {
+    color: #c9a77c !important;
+    transform: translateX(10px) !important;
+}
+
+/* MOBILE LANGUAGE SWITCHER IN MENU - EXACT COPY */
+.mobile-language-switcher {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: rgba(201, 167, 124, 0.2) !important;
+    border-radius: 25px !important;
+    padding: 8px !important;
+    border: 1px solid rgba(201, 167, 124, 0.4) !important;
+    margin-top: 20px !important;
+    opacity: 0 !important;
+    transform: translateY(30px) !important;
+    transition: all 0.3s ease 0.4s !important;
+}
+
+.mobile-menu.active .mobile-language-switcher {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.mobile-lang-btn {
+    padding: 8px 16px !important;
+    border: none !important;
+    background: transparent !important;
+    color: white !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.mobile-lang-btn.active {
+    background: #c9a77c !important;
+    color: white !important;
+    box-shadow: 0 2px 10px rgba(201, 167, 124, 0.4) !important;
+}
+
+/* MOBILE RESPONSIVE - UPDATED */
+@media (max-width: 768px) {
+    header {
+        padding: 12px 20px !important;
+        background-color: rgba(255, 255, 255, 0.0) !important; /* Transparent on mobile initially */
+        backdrop-filter: none !important;
+        color: white !important; /* White text initially */
+    }
+    
+    header.scrolled {
+        background-color: rgba(255, 255, 255, 0.98) !important;
+        backdrop-filter: blur(10px) !important;
+        color: #333 !important; /* Dark text when scrolled */
+        top: 0 !important; /* Full width on mobile when scrolled */
+        left: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .logo {
+        font-size: 22px !important;
+        font-weight: 600 !important;
+        color: inherit !important; /* Inherit color from header */
+    }
+    
+    .hamburger span {
+        background: currentColor !important; /* Use current text color */
+    }
+    
+    /* HIDE DESKTOP NAV ON MOBILE */
+    .nav-links,
+    .header-right .language-switcher,
+    .wifi-info {
+        display: none !important;
+    }
+    
+    /* SHOW HAMBURGER ON MOBILE */
+    .hamburger {
+        display: block !important;
+    }
+    
+    .menu-hero {
+        height: 70vh; /* Smaller on mobile */
+        background-attachment: scroll; /* Better mobile performance */
+    }
+}
+        /* Header Right Section */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* WiFi Info */
+        .wifi-info {
+            background: linear-gradient(135deg, #c9a77c, #b8966b);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(201, 167, 124, 0.3);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+            padding: 8px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .mobile-menu a {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 15px 25px;
+        }
+
+        .mobile-menu a:hover {
+            color: #c9a77c;
+            transform: scale(1.1);
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+       /* Hero Section - CORRECTED */
+.menu-hero {
+    height: 100vh; /* Full viewport height like index.html */
+    min-height: 500px;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 0; /* Remove margin-top so header overlays properly */
+    position: relative;
+}
+
+        .menu-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.25) 100%);
+        }
+
+        .menu-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 30px;
+            max-width: 900px;
+        }
+        
+        .menu-hero h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 400;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: 4px;
+        }
+        
+        .menu-hero p {
+            font-size: clamp(18px, 4vw, 24px);
+            max-width: 700px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Quick Info Bar */
+        .quick-info {
+            background: linear-gradient(135deg, #c9a77c, #b8966b);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .quick-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .quick-info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .quick-info-item i {
+            font-size: 20px;
+        }
+
+        /* Menu Content */
+        .menu-content {
+            padding: 80px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Menu Sections */
+        .menu-section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 0 30px;
+        }
+
+        .section-title {
+            font-size: clamp(36px, 6vw, 48px);
+            font-weight: 400;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #c9a77c, #b8966b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-size: clamp(16px, 3vw, 20px);
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Traditional Menu Tables */
+        .menu-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            border: 1px solid rgba(201, 167, 124, 0.1);
+        }
+
+        .menu-table-header {
+            background: linear-gradient(135deg, #c9a77c, #b8966b);
+            color: white;
+            padding: 25px 35px;
+            font-size: clamp(20px, 4vw, 26px);
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-table-content {
+            padding: 0;
+        }
+
+        .menu-table-row {
+            display: flex;
+            align-items: center;
+            padding: 25px 35px;
+            border-bottom: 1px solid #f5f5f5;
+            transition: all 0.3s ease;
+            gap: 20px;
+        }
+
+        .menu-table-row:hover {
+            background: #fcf9f6;
+            transform: translateX(8px);
+        }
+
+        .menu-table-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Menu Item Image */
+        .menu-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .menu-table-row:hover .menu-item-image {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-table-item {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .menu-table-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .menu-table-desc {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .menu-table-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #c9a77c;
+            white-space: nowrap;
+            margin-left: 20px;
+            min-width: 80px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        /* Sub-sections for organized menus */
+        .menu-subsection {
+            margin-bottom: 40px;
+        }
+
+        .subsection-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #c9a77c;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .subsection-title::before,
+        .subsection-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #c9a77c, #b8966b);
+        }
+
+        .subsection-title::before {
+            left: 0;
+        }
+
+        .subsection-title::after {
+            right: 0;
+        }
+
+        /* Special Notes */
+        .special-note {
+            background: linear-gradient(135deg, #fff9e6, #fdf4e3);
+            border-left: 6px solid #c9a77c;
+            padding: 25px 30px;
+            margin: 40px 0;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #666;
+            box-shadow: 0 5px 20px rgba(201, 167, 124, 0.1);
+        }
+
+        .special-note strong {
+            color: #c9a77c;
+            font-weight: 600;
+        }
+
+        /* Payment Info */
+        .payment-info {
+            background: #f8f8f8;
+            padding: 80px 30px;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .payment-info h2 {
+            font-size: clamp(32px, 5vw, 42px);
+            margin-bottom: 40px;
+            color: #333;
+            font-weight: 400;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .payment-card {
+            background: white;
+            padding: 40px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(201, 167, 124, 0.1);
+        }
+
+        .payment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .payment-card i {
+            font-size: 36px;
+            color: #c9a77c;
+            margin-bottom: 20px;
+        }
+
+        .payment-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .payment-card p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #000, #1a1a1a);
+            color: white;
+            padding: 80px 30px 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer-section h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: #c9a77c;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #ccc;
+            line-height: 1.7;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #c9a77c;
+        }
+
+        .footer-social {
+            margin-top: 25px;
+        }
+
+        .footer-social a {
+            margin-right: 20px;
+            font-size: 22px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            transform: translateY(-3px);
+            color: #c9a77c;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+
+            .language-switcher{
+                display: none;
+            }
+
+            .wifi-info{
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            header {
+                padding: 15px 25px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .header-right {
+                gap: 15px;
+            }
+
+            .wifi-info {
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+
+            .language-switcher {
+                margin-right: 10px;
+            }
+
+            .lang-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .menu-hero {
+                height: 50vh;
+                min-height: 400px;
+                background-attachment: scroll;
+                margin-top: 70px;
+            }
+
+            .quick-info {
+                padding: 25px 15px;
+            }
+
+            .quick-info-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .quick-info-item {
+                font-size: 14px;
+                padding: 15px 20px;
+            }
+
+            .menu-content {
+                padding: 60px 20px;
+            }
+
+            .menu-section {
+                margin-bottom: 60px;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+                padding: 0 20px;
+            }
+
+            .menu-table-header {
+                padding: 20px 25px;
+                font-size: 20px;
+            }
+
+            .menu-table-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 25px 25px;
+            }
+
+            .menu-item-image {
+                width: 100%;
+                height: 140px;
+                border-radius: 12px;
+                order: -1;
+                margin-bottom: 5px;
+            }
+
+            .menu-table-item {
+                padding-right: 0;
+                width: 100%;
+                order: 1;
+            }
+
+            .menu-table-name {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .menu-table-desc {
+                font-size: 15px;
+                margin-bottom: 15px;
+            }
+
+            .menu-table-price {
+                margin-left: 0;
+                align-self: flex-end;
+                font-size: 22px;
+                font-weight: 700;
+                color: #c9a77c;
+                order: 2;
+                padding: 8px 15px;
+                background: rgba(201, 167, 124, 0.1);
+                border-radius: 20px;
+                border: 1px solid rgba(201, 167, 124, 0.3);
+            }
+
+            .special-note {
+                padding: 20px 25px;
+                margin: 30px 0;
+                font-size: 15px;
+            }
+
+            .payment-info {
+                padding: 60px 20px;
+                margin: 60px 0;
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .payment-card {
+                padding: 35px 25px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .footer-section {
+                padding: 0 25px;
+            }
+
+            .subsection-title::before,
+            .subsection-title::after {
+                display: none;
+            }
+
+            .mobile-menu .language-switcher {
+                margin: 20px 0;
+            }
+        }
+
+        /* Tablet Responsive */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-links {
+                gap: 25px;
+            }
+
+            .nav-links a {
+                font-size: 15px;
+            }
+
+            header {
+                padding: 18px 30px;
+            }
+
+            .menu-content {
+                padding: 70px 25px;
+            }
+
+            .menu-item-image {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1400px) {
+            .menu-content {
+                padding: 100px 50px;
+                max-width: 1400px;
+            }
+
+            .menu-item-image {
+                width: 90px;
+                height: 90px;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) {
+            .menu-table-row:hover {
+                transform: none;
+            }
+
+            .menu-table-row:hover .menu-item-image {
+                transform: none;
+            }
+        }
+
+        a{
+                text-decoration: none;
+            }
+
+            /* Add to menu.html CSS */
+.hamburger {
+    display: none;
+    width: 28px;
+    height: 28px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: #333;
+    border-radius: 2px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: all 0.25s ease-in-out;
+}
+
+.hamburger span:nth-child(1) { top: 0px; }
+.hamburger span:nth-child(2),
+.hamburger span:nth-child(3) { top: 9px; }
+.hamburger span:nth-child(4) { top: 18px; }
+
+.hamburger.active span:nth-child(1) {
+    top: 9px;
+    width: 0%;
+    left: 50%;
+}
+
+.hamburger.active span:nth-child(2) {
+    transform: rotate(45deg);
+    background: white;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg);
+    background: white;
+}
+
+.hamburger.active span:nth-child(4) {
+    top: 9px;
+    width: 0%;
+    left: 50%;
+}
+
+.mobile-language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201, 167, 124, 0.2);
+    border-radius: 25px;
+    padding: 8px;
+    border: 1px solid rgba(201, 167, 124, 0.4);
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.3s ease 0.4s;
+}
+
+.mobile-menu.active .mobile-language-switcher {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-lang-btn {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.mobile-lang-btn.active {
+    background: #c9a77c;
+    color: white;
+    box-shadow: 0 2px 10px rgba(201, 167, 124, 0.4);
+}
+
+@media (max-width: 768px) {
+    .nav-links,
+    .header-right .language-switcher,
+    .wifi-info {
+        display: none !important;
+    }
+    
+    .hamburger {
+        display: block !important;
+    }
+}
+
+ 
+
+    
+    </style>
+</head>
+<body>
+    <!-- LOADER -->
+   
+
+  <!-- Replace the entire header with this: -->
+<header>
+    <a href="index.html"><div class="logo">BOND CAFÉ</div></a>
+    
+    <!-- Desktop Navigation -->
+    <nav class="nav-links">
+        <a href="index.html" data-translate="nav-home">Domů</a>
+        <a href="menu.html" data-translate="nav-menu">Menu</a>
+        <a href="events.html" data-translate="nav-events">Events</a>
+        <a href="kontakt.html" data-translate="nav-contact">Kontakt</a>
+    </nav>
+    
+    <div class="header-right">
+        <!-- Desktop Language Switcher -->
+        <div class="language-switcher">
+            <button class="lang-btn active" data-lang="cs">CZ</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        
+        <!-- WiFi Info -->
+        <div class="wifi-info">
+            <i class="fas fa-wifi"></i>
+            <span>BondCafe / CAFEBOND007</span>
+        </div>
+        
+        <!-- Mobile Hamburger -->
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+    <!-- Mobile Menu -->
+<!-- Replace existing mobile menu with: -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="toggleMobileMenu()" data-translate="nav-home">Domů</a>
+    <a href="menu.html" onclick="toggleMobileMenu()" data-translate="nav-menu">Menu</a>
+    <a href="events.html" onclick="toggleMobileMenu()" data-translate="nav-events">Events</a>
+    <a href="kontakt.html" onclick="toggleMobileMenu()" data-translate="nav-contact">Kontakt</a>
+    <a href="tel:+420608957187" onclick="toggleMobileMenu()" data-translate="reservation">Rezervace</a>
+    
+    <!-- Mobile Language Switcher -->
+    <div class="mobile-language-switcher">
+        <button class="mobile-lang-btn active" data-lang="cs">CZ</button>
+        <button class="mobile-lang-btn" data-lang="en">EN</button>
+    </div>
+</div>
+
+    <!-- Hero Section -->
+    <section class="menu-hero">
+        <div class="menu-hero-content">
+            <h1 data-aos="fade-up" data-translate="menu-title">BOND MENU</h1>
+            <p data-aos="fade-up" data-aos-delay="300" data-translate="menu-subtitle">Kompletní menu s čerstvými snídaněmi, výběrovou kávou a jedinečnými koktejly v srdci Prahy</p>
+        </div>
+    </section>
+
+    <!-- Quick Info -->
+    <section class="quick-info">
+        <div class="quick-info-grid">
+            <div class="quick-info-item">
+                <i class="fas fa-wifi"></i>
+                <span data-translate="wifi-info">Bezplatné WiFi: BondCafe</span>
+            </div>
+            <div class="quick-info-item">
+                <i class="fas fa-euro-sign"></i>
+                <span data-translate="euro-info">Přijímáme eura (kurz dle banky)</span>
+            </div>
+            <div class="quick-info-item">
+                <i class="fas fa-users"></i>
+                <span data-translate="group-payment">Skupiny platí dohromady</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Content -->
+    <section class="menu-content">
+        <!-- Breakfast Section -->
+        <div class="menu-section" id="breakfast">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="breakfast-title">Vejce & Snídaně</h2>
+                <p class="section-subtitle" data-translate="breakfast-subtitle">Čerstvé snídaně připravované každý den od 8:30 do 15:00</p>
+            </div>
+
+            <!-- Eggs Subsection -->
+            <div class="menu-subsection">
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-header">
+                        <i class="fas fa-egg"></i> 
+                        <span data-translate="eggs-section">VEJCE / EGGS</span>
+                    </div>
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Scrambled eggs" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Scrambled eggs</div>
+                                <div class="menu-table-desc" data-translate="scrambled-desc">3 ks míchaných vajec, máslo, toast, salát</div>
+                            </div>
+                            <div class="menu-table-price">175 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1481931715705-36f5f79f1f3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Scrambled eggs with bacon" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Scrambled eggs + bacon</div>
+                                <div class="menu-table-desc" data-translate="scrambled-bacon-desc">3 ks míchaných vajec, slanina, párek, toast, salát</div>
+                            </div>
+                            <div class="menu-table-price">210 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Scrambled eggs with beans" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Scrambled eggs + beans</div>
+                                <div class="menu-table-desc" data-translate="scrambled-beans-desc">3 ks míchaných vajec, fazole, slanina, párek, toast, salát</div>
+                            </div>
+                            <div class="menu-table-price">240 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Scrambled eggs with goat cheese" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Scrambled eggs + goat cheese</div>
+                                <div class="menu-table-desc" data-translate="scrambled-goat-desc">3 ks míchaných vajec, slanina, kozí sýr, toast, máslo, salát</div>
+                            </div>
+                            <div class="menu-table-price">280 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1506084868230-bb9d95c24759?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pancakes with bacon and egg" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Pancakes + bacon & egg</div>
+                                <div class="menu-table-desc" data-translate="pancakes-bacon-desc">3 lívance se slaninou, míchaným vejcem, cibulkou, salát</div>
+                            </div>
+                            <div class="menu-table-price">280 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1559847844-d721426d6edc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Salmon bread" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Salmon bread</div>
+                                <div class="menu-table-desc" data-translate="salmon-bread-desc">Chléb s lososem, vejci, našlehaným sýrem, ředkvičkami, salát</div>
+                            </div>
+                            <div class="menu-table-price">280 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sweet Breakfast Subsection -->
+            <div class="menu-subsection">
+                <h3 class="subsection-title" data-translate="sweet-breakfast">Sladké snídaně</h3>
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Nutella toast" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="nutella-toast">3 toasty Nutella</div>
+                                <div class="menu-table-desc" data-translate="nutella-toast-desc">3 toasty, nutella, džem, med</div>
+                            </div>
+                            <div class="menu-table-price">165 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mini croissants" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="mini-croissants">3 mini croissanty</div>
+                                <div class="menu-table-desc" data-translate="mini-croissants-desc">3 mini croissanty, nutella, džem, med</div>
+                            </div>
+                            <div class="menu-table-price">210 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1506084868230-bb9d95c24759?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pancakes with cream and fruit" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="pancakes-cream">3 lívance smetana ovoce</div>
+                                <div class="menu-table-desc" data-translate="pancakes-cream-desc">3 lívance, zakysaná smetana, ovoce</div>
+                            </div>
+                            <div class="menu-table-price">240 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1528975604071-dd2981c52352?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Nutella pancakes" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="pancakes-nutella">3 lívance nutella</div>
+                                <div class="menu-table-desc" data-translate="pancakes-nutella-desc">3 lívance, nutella, ovoce</div>
+                            </div>
+                            <div class="menu-table-price">240 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Czech pancakes" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="czech-pancakes">České lívance</div>
+                                <div class="menu-table-desc" data-translate="czech-pancakes-desc">3 tradiční české lívance se skořicí, máslem a ovocem</div>
+                            </div>
+                            <div class="menu-table-price">255 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Healthy Options Subsection -->
+            <div class="menu-subsection">
+                <h3 class="subsection-title" data-translate="healthy-options">Zdravé volby</h3>
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Granola bowl" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Granola Bowl</div>
+                                <div class="menu-table-desc" data-translate="granola-desc">Granola, jogurt, javorový sirup, ovoce, kokosové chipsy, ořechy</div>
+                            </div>
+                            <div class="menu-table-price">240 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1543339494-b4cd4f7ba686?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Porridge bowl" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Porridge Bowl</div>
+                                <div class="menu-table-desc" data-translate="porridge-desc">Ovesná kaše s ovocem a bílou čokoládou</div>
+                            </div>
+                            <div class="menu-table-price">240 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1603486509881-c06e84c5b3ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Protein bread with avocado" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="protein-bread">Proteinový chléb</div>
+                                <div class="menu-table-desc" data-translate="protein-bread-desc">Proteinový chléb s avokádem, míchanými vejci, semínky</div>
+                            </div>
+                            <div class="menu-table-price">280 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Goat cheese salad" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="goat-salad">Listový salát kozí sýr</div>
+                                <div class="menu-table-desc" data-translate="goat-salad-desc">Listový salát s kozím sýrem, jablky, vlašskými ořechy a brusinkami</div>
+                            </div>
+                            <div class="menu-table-price">280 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toasts & Light Meals -->
+            <div class="menu-subsection">
+                <h3 class="subsection-title" data-translate="toasts-light">Toasty & lehká jídla</h3>
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Ham and cheese toast" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="ham-toast">Toasty šunka sýr</div>
+                                <div class="menu-table-desc" data-translate="ham-toast-desc">Toasty se šunkou, sýrem, salát</div>
+                            </div>
+                            <div class="menu-table-price">185 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Parma ham toast" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="parma-toast">Toasty parmská šunka</div>
+                                <div class="menu-table-desc" data-translate="parma-toast-desc">Toasty s parmskou šunkou, sýrem, salát</div>
+                            </div>
+                            <div class="menu-table-price">185 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Belgian toast" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="belgian-toast">Belgický toast</div>
+                                <div class="menu-table-desc" data-translate="belgian-toast-desc">Belgický toast s trhaným hovězím masem, jalapeños a cheddarem</div>
+                            </div>
+                            <div class="menu-table-price">280 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Sausages with cheese" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="sausages">2 ks párek</div>
+                                <div class="menu-table-desc" data-translate="sausages-desc">Tvrdý sýr, hruška, hořčice, salátek, pečivo, máslo</div>
+                            </div>
+                            <div class="menu-table-price">260 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coffee Section -->
+        <div class="menu-section" id="coffee">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="coffee-title">Káva & Čaj</h2>
+                <p class="section-subtitle" data-translate="coffee-subtitle">Výběrová káva z nejlepších plantáží světa, čerstvě pražená pro dokonalou chuť</p>
+            </div>
+
+            <div class="special-note">
+                <strong data-translate="alt-milk-note">Poznámka:</strong> <span data-translate="alt-milk-text">Alternativní mléka (mandlové, ovesné, sojové, bezlaktózové): + 15 Kč</span>
+            </div>
+
+            <!-- Hot Coffee -->
+            <div class="menu-subsection">
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-header">
+                        <i class="fas fa-coffee"></i> 
+                        <span data-translate="hot-coffee">HORKÁ KÁVA / HOT COFFEE</span>
+                    </div>
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Espresso" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Espresso</div>
+                            </div>
+                            <div class="menu-table-price">55 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Espresso macchiato" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Espresso macchiato</div>
+                            </div>
+                            <div class="menu-table-price">65 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Double espresso" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Double espresso</div>
+                            </div>
+                            <div class="menu-table-price">85 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Americano" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Americano</div>
+                            </div>
+                            <div class="menu-table-price">65 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Lungo" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Lungo</div>
+                            </div>
+                            <div class="menu-table-price">65 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cappuccino" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Cappuccino</div>
+                            </div>
+                            <div class="menu-table-price">83 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1485808191679-5f86510681a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Caffe Latte" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Caffè Latte</div>
+                            </div>
+                            <div class="menu-table-price">92 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1485808191679-5f86510681a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Flat White" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Flat White</div>
+                            </div>
+                            <div class="menu-table-price">92 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Macchiato Latte" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Macchiato Latte</div>
+                            </div>
+                            <div class="menu-table-price">95 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specialty Drinks -->
+            <div class="menu-subsection">
+                <h3 class="subsection-title" data-translate="specialty-drinks">Speciální nápoje</h3>
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Irish Coffee" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Irish Coffee</div>
+                            </div>
+                            <div class="menu-table-price">140 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Baileys Coffee" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Baileys Coffee</div>
+                            </div>
+                            <div class="menu-table-price">140 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1542990253-a781e04c0082?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Hot Chocolate" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Hot Chocolate</div>
+                            </div>
+                            <div class="menu-table-price">85 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chai Latte" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Chai Latte</div>
+                            </div>
+                            <div class="menu-table-price">95 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Hot Ginger" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Hot Ginger</div>
+                            </div>
+                            <div class="menu-table-price">85 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tea Section -->
+            <div class="menu-subsection">
+                <h3 class="subsection-title" data-translate="tea-section">Čaje</h3>
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Tea" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Tea Fresh</div>
+                            </div>
+                            <div class="menu-table-price">65 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Green/Black Tea" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="green-black-tea">Čaj (zelený/černý)</div>
+                            </div>
+                            <div class="menu-table-price">65 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Breakfast Tea" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Breakfast Tea</div>
+                            </div>
+                            <div class="menu-table-price">65 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ice Coffee Section -->
+            <div class="menu-subsection">
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-header">
+                        <i class="fas fa-snowflake"></i> 
+                        <span data-translate="ice-coffee">LEDOVÁ KÁVA / ICE COFFEE</span>
+                    </div>
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Ice Latte" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Ice Latte</div>
+                            </div>
+                            <div class="menu-table-price">120 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Ice Matcha Latte" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Ice Matcha Latte</div>
+                            </div>
+                            <div class="menu-table-price">110 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Ice Matcha Latte Raspberry" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Ice Matcha Latte Raspberry</div>
+                            </div>
+                            <div class="menu-table-price">135 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Caramel Frappe" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Caramel Frappe</div>
+                            </div>
+                            <div class="menu-table-price">135 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Frozen Americano" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Frozen Americano</div>
+                            </div>
+                            <div class="menu-table-price">65 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Espresso Tonic" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Espresso Tonic</div>
+                            </div>
+                            <div class="menu-table-price">110 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bumblebee" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Bumblebee</div>
+                                <div class="menu-table-desc" data-translate="bumblebee-desc">Espresso + tonic + med</div>
+                            </div>
+                            <div class="menu-table-price">150 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drinks Section -->
+        <div class="menu-section" id="drinks">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="drinks-title">Nápoje</h2>
+                <p class="section-subtitle" data-translate="drinks-subtitle">Čerstvé džusy, limonády a nealkoholické nápoje pro perfektní osvěžení</p>
+            </div>
+
+            <div class="menu-table" data-aos="fade-up">
+                <div class="menu-table-header">
+                    <i class="fas fa-glass-whiskey"></i> 
+                    <span data-translate="soft-drinks">NEALKOHOLICKÉ / SOFT DRINKS</span>
+                </div>
+                <div class="menu-table-content">
+                    <div class="menu-table-row">
+                        <img src="https://images.unsplash.com/photo-1523371683702-af5cd0cd9193?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Homemade lemonade" class="menu-item-image">
+                        <div class="menu-table-item">
+                            <div class="menu-table-name" data-translate="homemade-lemonade">Domácí limonáda</div>
+                            <div class="menu-table-desc">0,4 l</div>
+                        </div>
+                        <div class="menu-table-price">110 Kč</div>
+                    </div>
+                    <div class="menu-table-row">
+                        <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fresh Orange Juice" class="menu-item-image">
+                        <div class="menu-table-item">
+                            <div class="menu-table-name">Fresh Orange Juice</div>
+                            <div class="menu-table-desc">0,2 l</div>
+                        </div>
+                        <div class="menu-table-price">110 Kč</div>
+                    </div>
+                    <div class="menu-table-row">
+                        <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Apple/Orange Juice" class="menu-item-image">
+                        <div class="menu-table-item">
+                            <div class="menu-table-name" data-translate="juice-apple-orange">Džus (jablko / pomeranč)</div>
+                            <div class="menu-table-desc">0,2 l</div>
+                        </div>
+                        <div class="menu-table-price">95 Kč</div>
+                    </div>
+                    <div class="menu-table-row">
+                        <img src="https://images.unsplash.com/photo-1523371683702-af5cd0cd9193?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fresh Orange Lemonade" class="menu-item-image">
+                        <div class="menu-table-item">
+                            <div class="menu-table-name">Fresh Orange Lemonáda</div>
+                            <div class="menu-table-desc">0,4 l</div>
+                        </div>
+                        <div class="menu-table-price">120 Kč</div>
+                    </div>
+                    <div class="menu-table-row">
+                        <img src="https://images.unsplash.com/photo-1544387903-6ae8a5d7a6e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pellegrino" class="menu-item-image">
+                        <div class="menu-table-item">
+                            <div class="menu-table-name">Pellegrino</div>
+                            <div class="menu-table-desc">0,25 l</div>
+                        </div>
+                        <div class="menu-table-price">85 Kč</div>
+                    </div>
+                    <div class="menu-table-row">
+                        <img src="https://images.unsplash.com/photo-1544387903-6ae8a5d7a6e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Solan de Cabras water" class="menu-item-image">
+                        <div class="menu-table-item">
+                            <div class="menu-table-name" data-translate="water">Solan de Cabras voda</div>
+                            <div class="menu-table-desc">0,33 l</div>
+                        </div>
+                        <div class="menu-table-price">85 Kč</div>
+                    </div>
+                    <div class="menu-table-row">
+                        <img src="https://images.unsplash.com/photo-1629203851122-3726ecdf7d0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Coca-Cola" class="menu-item-image">
+                        <div class="menu-table-item">
+                            <div class="menu-table-name">Coca-Cola</div>
+                            <div class="menu-table-desc">0,33 l</div>
+                        </div>
+                        <div class="menu-table-price">65 Kč</div>
+                    </div>
+                    <div class="menu-table-row">
+                        <img src="https://images.unsplash.com/photo-1629203851122-3726ecdf7d0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Coca-Cola Zero" class="menu-item-image">
+                        <div class="menu-table-item">
+                            <div class="menu-table-name">Coca-Cola Zero</div>
+                            <div class="menu-table-desc">0,33 l</div>
+                        </div>
+                        <div class="menu-table-price">65 Kč</div>
+                    </div>
+                    <div class="menu-table-row">
+                        <img src="https://images.unsplash.com/photo-1544387903-6ae8a5d7a6e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Tonic" class="menu-item-image">
+                        <div class="menu-table-item">
+                            <div class="menu-table-name">Tonic</div>
+                            <div class="menu-table-desc">0,25 l</div>
+                        </div>
+                        <div class="menu-table-price">65 Kč</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cocktails Section -->
+        <div class="menu-section" id="cocktails">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="cocktails-title">Koktejly & Alkohol</h2>
+                <p class="section-subtitle" data-translate="cocktails-subtitle">Výběr kvalitních koktejlů, piv a vín pro dokonalý zážitek</p>
+            </div>
+
+            <!-- Cocktails -->
+            <div class="menu-subsection">
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-header">
+                        <i class="fas fa-cocktail"></i> 
+                        <span data-translate="cocktails-section">KOKTEJLY / COCKTAILS</span>
+                    </div>
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bond Drink - Martini" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Bond Drink</div>
+                                <div class="menu-table-desc" data-translate="bond-drink-desc">Martini, vodka</div>
+                            </div>
+                            <div class="menu-table-price">155 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Gin & Tonic" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Gin & Tonic</div>
+                            </div>
+                            <div class="menu-table-price">155 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Aperol Spritz" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Aperol Spritz</div>
+                            </div>
+                            <div class="menu-table-price">145 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Mimosa" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Mimosa</div>
+                            </div>
+                            <div class="menu-table-price">145 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beer -->
+            <div class="menu-subsection">
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-header">
+                        <i class="fas fa-beer"></i> 
+                        <span data-translate="beer-section">PIVO / BEER</span>
+                    </div>
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pilsner Urquell" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Pilsner Urquell</div>
+                                <div class="menu-table-desc">0,5 l</div>
+                            </div>
+                            <div class="menu-table-price">75 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bond Beer" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Bond Beer</div>
+                                <div class="menu-table-desc">0,33 l</div>
+                            </div>
+                            <div class="menu-table-price">85 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wine -->
+            <div class="menu-subsection">
+                <div class="menu-table" data-aos="fade-up">
+                    <div class="menu-table-header">
+                        <i class="fas fa-wine-glass"></i> 
+                        <span data-translate="wine-section">VÍNO / WINE</span>
+                    </div>
+                    <div class="menu-table-content">
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Prosecco" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name" data-translate="prosecco">Prosecco (daily)</div>
+                                <div class="menu-table-desc">0,15 l</div>
+                            </div>
+                            <div class="menu-table-price">130 Kč</div>
+                        </div>
+                        <div class="menu-table-row">
+                            <img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Champagne Gauthier" class="menu-item-image">
+                            <div class="menu-table-item">
+                                <div class="menu-table-name">Champagne Gauthier</div>
+                                <div class="menu-table-desc">0,75 l</div>
+                            </div>
+                            <div class="menu-table-price">1 600 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Info -->
+    <section class="payment-info">
+        <h2 data-translate="payment-info-title">Platební informace</h2>
+        <div class="payment-grid">
+            <div class="payment-card" data-aos="fade-up">
+                <i class="fas fa-euro-sign"></i>
+                <h3 data-translate="euro-accepted">Přijímáme eura</h3>
+                <p data-translate="euro-rate">Kurz stejný jako v bance pro vaše pohodlí</p>
+            </div>
+            
+            <div class="payment-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-users"></i>
+                <h3 data-translate="group-payment-title">Skupiny platí dohromady</h3>
+                <p data-translate="group-payment-desc">Rychlejší obsluha a jednodušší účtování</p>
+            </div>
+            
+            <div class="payment-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-clock"></i>
+                <h3 data-translate="fresh-daily">Čerstvé denně</h3>
+                <p data-translate="fresh-daily-desc">Všechny produkty připravujeme čerstvé každý den</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section" data-aos="fade-up" data-aos-duration="800">
+                <h3>BOND CAFÉ</h3>
+                <p data-translate="footer-desc">Nejlepší káva v Praze. Navštivte nás v centru Prahy a ochutnejte naši výběrovou kávu.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                <h3 data-translate="contact">Kontakt</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Štupartská 9, 110 00 Staré Město</p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+420608957187">+420 608 957 187</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@bondcafe.cz">info@bondcafe.cz</a></p>
+            </div>
+            
+            <div class="footer-section" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                <h3 data-translate="quick-links">Rychlé odkazy</h3>
+                <p><a href="index.html" data-translate="nav-home">Domů</a></p>
+                <p><a href="menu.html" data-translate="nav-menu">Menu</a></p>
+                <p><a href="events.html" data-translate="nav-events">Events</a></p>
+                <p><a href="kontakt.html" data-translate="nav-contact">Kontakt</a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <a href="ochrana-osobnich-udaju.html" data-translate="privacy-policy">Ochrana osobních údajů</a>
+                <a href="obchodni-podminky.html" data-translate="terms">Obchodní podmínky</a>
+                <a href="#cookies" data-translate="cookie-policy">Zásady cookies</a>
+                <a href="#sitemap" data-translate="sitemap">Mapa stránek</a>
+            </div>
+            <div class="footer-copyright">
+                © 2024 Bond Café Praha. <span data-translate="rights-reserved">Všechna práva vyhrazena.</span> | 
+                IČO: 05594278 | DIČ: CZ05594278 | 
+                <a href="https://www.pnhmedia.com" target="_blank" rel="noopener" data-translate="created-by">Vytvořeno: PNH MEDIA</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // TRANSLATION SYSTEM
+        const translations = {
+            cs: {
+                'loading': 'Načítání...',
+                'nav-breakfast': 'Snídaně',
+                'nav-coffee': 'Káva',
+                'nav-drinks': 'Nápoje',
+                'nav-cocktails': 'Koktejly',
+                'nav-contact': 'Kontakt',
+                'menu-title': 'BOND MENU',
+                'menu-subtitle': 'Kompletní menu s čerstvými snídaněmi, výběrovou kávou a jedinečnými koktejly v srdci Prahy',
+                'wifi-info': 'Bezplatné WiFi: BondCafe',
+                'euro-info': 'Přijímáme eura (kurz dle banky)',
+                'group-payment': 'Skupiny platí dohromady',
+                'breakfast-title': 'Vejce & Snídaně',
+                'breakfast-subtitle': 'Čerstvé snídaně připravované každý den od 8:30 do 15:00',
+                'eggs-section': 'VEJCE / EGGS',
+                'scrambled-desc': '3 ks míchaných vajec, máslo, toast, salát',
+                'scrambled-bacon-desc': '3 ks míchaných vajec, slanina, párek, toast, salát',
+                'scrambled-beans-desc': '3 ks míchaných vajec, fazole, slanina, párek, toast, salát',
+                'scrambled-goat-desc': '3 ks míchaných vajec, slanina, kozí sýr, toast, máslo, salát',
+                'pancakes-bacon-desc': '3 lívance se slaninou, míchaným vejcem, cibulkou, salát',
+                'salmon-bread-desc': 'Chléb s lososem, vejci, našlehaným sýrem, ředkvičkami, salát',
+                'sweet-breakfast': 'Sladké snídaně',
+                'nutella-toast': '3 toasty Nutella',
+                'nutella-toast-desc': '3 toasty, nutella, džem, med',
+                'mini-croissants': '3 mini croissanty',
+                'mini-croissants-desc': '3 mini croissanty, nutella, džem, med',
+                'pancakes-cream': '3 lívance smetana ovoce',
+                'pancakes-cream-desc': '3 lívance, zakysaná smetana, ovoce',
+                'pancakes-nutella': '3 lívance nutella',
+                'pancakes-nutella-desc': '3 lívance, nutella, ovoce',
+                'czech-pancakes': 'České lívance',
+                'czech-pancakes-desc': '3 tradiční české lívance se skořicí, máslem a ovocem',
+                'healthy-options': 'Zdravé volby',
+                'granola-desc': 'Granola, jogurt, javorový sirup, ovoce, kokosové chipsy, ořechy',
+                'porridge-desc': 'Ovesná kaše s ovocem a bílou čokoládou',
+                'protein-bread': 'Proteinový chléb',
+                'protein-bread-desc': 'Proteinový chléb s avokádem, míchanými vejci, semínky',
+                'goat-salad': 'Listový salát kozí sýr',
+                'goat-salad-desc': 'Listový salát s kozím sýrem, jablky, vlašskými ořechy a brusinkami',
+                'toasts-light': 'Toasty & lehká jídla',
+                'ham-toast': 'Toasty šunka sýr',
+                'ham-toast-desc': 'Toasty se šunkou, sýrem, salát',
+                'parma-toast': 'Toasty parmská šunka',
+                'parma-toast-desc': 'Toasty s parmskou šunkou, sýrem, salát',
+                'belgian-toast': 'Belgický toast',
+                'belgian-toast-desc': 'Belgický toast s trhaným hovězím masem, jalapeños a cheddarem',
+                'sausages': '2 ks párek',
+                'sausages-desc': 'Tvrdý sýr, hruška, hořčice, salátek, pečivo, máslo',
+                'coffee-title': 'Káva & Čaj',
+                'coffee-subtitle': 'Výběrová káva z nejlepších plantáží světa, čerstvě pražená pro dokonalou chuť',
+                'alt-milk-note': 'Poznámka:',
+                'alt-milk-text': 'Alternativní mléka (mandlové, ovesné, sojové, bezlaktózové): + 15 Kč',
+                'hot-coffee': 'HORKÁ KÁVA / HOT COFFEE',
+                'specialty-drinks': 'Speciální nápoje',
+                'tea-section': 'Čaje',
+                'green-black-tea': 'Čaj (zelený/černý)',
+                'ice-coffee': 'LEDOVÁ KÁVA / ICE COFFEE',
+                'bumblebee-desc': 'Espresso + tonic + med',
+                'drinks-title': 'Nápoje',
+                'drinks-subtitle': 'Čerstvé džusy, limonády a nealkoholické nápoje pro perfektní osvěžení',
+                'soft-drinks': 'NEALKOHOLICKÉ / SOFT DRINKS',
+                'homemade-lemonade': 'Domácí limonáda',
+                'juice-apple-orange': 'Džus (jablko / pomeranč)',
+                'water': 'Solan de Cabras voda',
+                'cocktails-title': 'Koktejly & Alkohol',
+                'cocktails-subtitle': 'Výběr kvalitních koktejlů, piv a vín pro dokonalý zážitek',
+                'cocktails-section': 'KOKTEJLY / COCKTAILS',
+                'bond-drink-desc': 'Martini, vodka',
+                'beer-section': 'PIVO / BEER',
+                'wine-section': 'VÍNO / WINE',
+                'prosecco': 'Prosecco (daily)',
+                'payment-info-title': 'Platební informace',
+                'euro-accepted': 'Přijímáme eura',
+                'euro-rate': 'Kurz stejný jako v bance pro vaše pohodlí',
+                'group-payment-title': 'Skupiny platí dohromady',
+                'group-payment-desc': 'Rychlejší obsluha a jednodušší účtování',
+                'fresh-daily': 'Čerstvé denně',
+                'fresh-daily-desc': 'Všechny produkty připravujeme čerstvé každý den',
+                'footer-desc': 'Nejlepší káva v centru Prahy. Navštivte nás na Štupartské 9 v Starém Městě pro nezapomenutelný zážitek.',
+                'contact': 'Kontakt',
+                'opening-hours': 'Otevírací doba',
+                'weekdays': 'Po-Čt:',
+                'weekend': 'Pá-Ne:',
+                'rights-reserved': 'Všechna práva vyhrazena.'
+            },
+            en: {
+                'loading': 'Loading...',
+                'nav-breakfast': 'Breakfast',
+                'nav-coffee': 'Coffee',
+                'nav-drinks': 'Drinks',
+                'nav-cocktails': 'Cocktails',
+                'nav-contact': 'Contact',
+                'menu-title': 'BOND MENU',
+                'menu-subtitle': 'Complete menu with fresh breakfast, specialty coffee and unique cocktails in the heart of Prague',
+                'wifi-info': 'Free WiFi: BondCafe',
+                'euro-info': 'We accept euros (bank rate)',
+                'group-payment': 'Groups pay together',
+                'breakfast-title': 'Eggs & Breakfast',
+                'breakfast-subtitle': 'Fresh breakfast prepared daily from 8:30 to 15:00',
+                'eggs-section': 'EGGS / VEJCE',
+                'scrambled-desc': '3 scrambled eggs, butter, toast, salad',
+                'scrambled-bacon-desc': '3 scrambled eggs, bacon, sausage, toast, salad',
+                'scrambled-beans-desc': '3 scrambled eggs, beans, bacon, sausage, toast, salad',
+                'scrambled-goat-desc': '3 scrambled eggs, bacon, goat cheese, toast, butter, salad',
+                'pancakes-bacon-desc': '3 pancakes with bacon, scrambled egg, onion, salad',
+                'salmon-bread-desc': 'Bread with salmon, eggs, whipped cheese, radishes, salad',
+                'sweet-breakfast': 'Sweet Breakfast',
+                'nutella-toast': '3 Nutella toasts',
+                'nutella-toast-desc': '3 toasts, nutella, jam, honey',
+                'mini-croissants': '3 mini croissants',
+                'mini-croissants-desc': '3 mini croissants, nutella, jam, honey',
+                'pancakes-cream': '3 pancakes cream fruit',
+                'pancakes-cream-desc': '3 pancakes, sour cream, fruit',
+                'pancakes-nutella': '3 nutella pancakes',
+                'pancakes-nutella-desc': '3 pancakes, nutella, fruit',
+                'czech-pancakes': 'Czech pancakes',
+                'czech-pancakes-desc': '3 traditional Czech pancakes with cinnamon, butter and fruit',
+                'healthy-options': 'Healthy Options',
+                'granola-desc': 'Granola, yogurt, maple syrup, fruit, coconut chips, nuts',
+                'porridge-desc': 'Oat porridge with fruit and white chocolate',
+                'protein-bread': 'Protein bread',
+                'protein-bread-desc': 'Protein bread with avocado, scrambled eggs, seeds',
+                'goat-salad': 'Leafy salad goat cheese',
+                'goat-salad-desc': 'Leafy salad with goat cheese, apples, walnuts and cranberries',
+                'toasts-light': 'Toasts & Light Meals',
+                'ham-toast': 'Ham cheese toasts',
+                'ham-toast-desc': 'Toasts with ham, cheese, salad',
+                'parma-toast': 'Parma ham toasts',
+                'parma-toast-desc': 'Toasts with Parma ham, cheese, salad',
+                'belgian-toast': 'Belgian toast',
+                'belgian-toast-desc': 'Belgian toast with pulled beef, jalapeños and cheddar',
+                'sausages': '2 sausages',
+                'sausages-desc': 'Hard cheese, pear, mustard, salad, bread, butter',
+                'coffee-title': 'Coffee & Tea',
+                'coffee-subtitle': 'Specialty coffee from the world\'s finest plantations, freshly roasted for perfect taste',
+                'alt-milk-note': 'Note:',
+                'alt-milk-text': 'Alternative milks (almond, oat, soy, lactose-free): + 15 CZK',
+                'hot-coffee': 'HOT COFFEE / HORKÁ KÁVA',
+                'specialty-drinks': 'Specialty Drinks',
+                'tea-section': 'Teas',
+                'green-black-tea': 'Tea (green/black)',
+                'ice-coffee': 'ICE COFFEE / LEDOVÁ KÁVA',
+                'bumblebee-desc': 'Espresso + tonic + honey',
+                'drinks-title': 'Drinks',
+                'drinks-subtitle': 'Fresh juices, lemonades and soft drinks for perfect refreshment',
+                'soft-drinks': 'SOFT DRINKS / NEALKOHOLICKÉ',
+                'homemade-lemonade': 'Homemade lemonade',
+                'juice-apple-orange': 'Juice (apple / orange)',
+                'water': 'Solan de Cabras water',
+                'cocktails-title': 'Cocktails & Alcohol',
+                'cocktails-subtitle': 'Selection of quality cocktails, beers and wines for the perfect experience',
+                'cocktails-section': 'COCKTAILS / KOKTEJLY',
+                'bond-drink-desc': 'Martini, vodka',
+                'beer-section': 'BEER / PIVO',
+                'wine-section': 'WINE / VÍNO',
+                'prosecco': 'Prosecco (daily)',
+                'payment-info-title': 'Payment Information',
+                'euro-accepted': 'We accept euros',
+                'euro-rate': 'Bank rate for your convenience',
+                'group-payment-title': 'Groups pay together',
+                'group-payment-desc': 'Faster service and easier billing',
+                'fresh-daily': 'Fresh daily',
+                'fresh-daily-desc': 'We prepare all products fresh every day',
+                'footer-desc': 'The best coffee in the center of Prague. Visit us at Štupartská 9 in Old Town for an unforgettable experience.',
+                'contact': 'Contact',
+                'opening-hours': 'Opening Hours',
+                'weekdays': 'Mon-Thu:',
+                'weekend': 'Fri-Sun:',
+                'rights-reserved': 'All rights reserved.'
+            }
+        };
+
+        let currentLanguage = 'cs';
+
+        function translatePage(language) {
+            currentLanguage = language;
+            const elements = document.querySelectorAll('[data-translate]');
+            
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[language] && translations[language][key]) {
+                    element.innerHTML = translations[language][key];
+                }
+            });
+
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === language) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update document language
+            document.documentElement.lang = language;
+            
+            // Save language preference
+            localStorage.setItem('preferred-language', language);
+        }
+
+        // Language switcher event listeners
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('lang-btn')) {
+                const language = e.target.getAttribute('data-lang');
+                translatePage(language);
+            }
+        });
+
+        // LOADER
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('hidden');
+                
+                // Start AOS animations after loader
+                setTimeout(() => {
+                    AOS.refresh();
+                }, 500);
+            }, 1500);
+        });
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved language preference
+            const savedLanguage = localStorage.getItem('preferred-language') || 'cs';
+            translatePage(savedLanguage);
+
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                offset: 60
+            });
+        });
+
+        // Header scroll effects
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', function() {
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (currentScrollTop > 30) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+        });
+
+        // ENHANCED MOBILE MENU FUNCTIONALITY - EXACT COPY FROM INDEX
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    const body = document.body;
+    
+    if (!menu || !hamburger) return;
+    
+    menu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+    
+    if (menu.classList.contains('active')) {
+        // Menu is opening
+        body.style.overflow = 'hidden';
+        body.style.position = 'fixed';
+        body.style.width = '100%';
+        body.style.top = `-${window.scrollY}px`;
+        
+        // Animate menu items with staggered delay
+        const menuItems = menu.querySelectorAll('a, .mobile-language-switcher');
+        menuItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.style.transitionDelay = `${index * 0.05}s`;
+            }, 50);
+        });
+        
+    } else {
+        // Menu is closing
+        const scrollY = body.style.top;
+        body.style.overflow = '';
+        body.style.position = '';
+        body.style.width = '';
+        body.style.top = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
+}
+
+function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.querySelector('.hamburger');
+    const body = document.body;
+    
+    if (!menu || !hamburger) return;
+    
+    menu.classList.remove('active');
+    hamburger.classList.remove('active');
+    
+    // Restore body scroll
+    const scrollY = body.style.top;
+    body.style.overflow = '';
+    body.style.position = '';
+    body.style.width = '';
+    body.style.top = '';
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+}
+
+// Enhanced header scroll behavior - EXACT COPY FROM INDEX
+// Enhanced header scroll behavior - ADD THIS TO YOUR SCRIPT
+function initHeaderBehavior() {
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    if (!header) return;
+    
+    window.addEventListener('scroll', function() {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add scrolled class for styling
+        if (currentScrollTop > 50) { // Trigger after 50px scroll
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+    }, { passive: true });
+}
+
+// Make sure this runs on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Load saved language preference
+    const savedLanguage = localStorage.getItem('preferred-language') || 'cs';
+    translatePage(savedLanguage);
+
+    // Initialize AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    }
+    
+    // Initialize GSAP animations
+    if (typeof gsap !== 'undefined') {
+        initGSAPAnimations();
+    }
+    
+    // Show GDPR banner if not accepted
+    if (!getCookie('gdpr_accepted')) {
+        setTimeout(() => {
+            const banner = document.getElementById('gdprBanner');
+            if (banner) banner.classList.add('show');
+        }, 3000);
+    }
+
+    // Initialize all functionality
+    initHeaderBehavior();
+    initCoffeeTypeSwitch();
+    initDessertTypeSwitch();
+    initSmoothScrolling();
+    initTouchInteractions();
+    preventZoomOnInputs();
+    initContactForm();
+});
+
+// Initialize header behavior - ADD TO DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Load saved language preference
+    const savedLanguage = localStorage.getItem('preferred-language') || 'cs';
+    translatePage(savedLanguage);
+
+    // Initialize AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    }
+    
+    // Initialize GSAP animations
+    if (typeof gsap !== 'undefined') {
+        initGSAPAnimations();
+    }
+    
+    // Show GDPR banner if not accepted
+    if (!getCookie('gdpr_accepted')) {
+        setTimeout(() => {
+            const banner = document.getElementById('gdprBanner');
+            if (banner) banner.classList.add('show');
+        }, 3000);
+    }
+
+    // Initialize all functionality
+    initHeaderBehavior();
+    initCoffeeTypeSwitch();
+    initDessertTypeSwitch();
+    initSmoothScrolling();
+    initTouchInteractions();
+    preventZoomOnInputs();
+    initContactForm();
+});
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = 100;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (mobileMenu.style.display === 'flex') {
+                        toggleMobileMenu();
+                    }
+                }
+            });
+        });
+
+        // Enhanced menu item interactions
+        document.querySelectorAll('.menu-table-row').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.background = '#fcf9f6';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.background = 'white';
+            });
+        });
+
+        // Parallax effect for hero section on desktop
+        if (window.innerWidth > 768) {
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.menu-hero');
+                const speed = scrolled * 0.3;
+                
+                if (parallax) {
+                    parallax.style.transform = `translateY(${speed}px)`;
+                }
+            });
+        }
+
+        // Performance optimization - lazy load images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Enhanced mobile experience
+        // Prevent zoom on input focus for iOS
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.fontSize = '16px';
+                });
+                input.addEventListener('blur', function() {
+                    this.style.fontSize = '';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
